@@ -1,0 +1,14 @@
+{
+  "name": "flashcards-app",
+  "version": "1.0.0",
+  "description": "flashcard app w/ user profiles/custom decks.",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Tennyson F. Horn",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.3"
+  }
+}
