@@ -6,4 +6,12 @@ const app = express(); //this is brevity. It makes it shorter. It saves time and
 const bodyParser = require('body-parser'); //For parsing incoming req bodies. Access w/ req.body
 const mongoose = require('mongoose'); //For tearing it up w/ MongoDB connections
 const userSessions = require('express-sessions'); //For quick and easy session objects
-const mongoSeshSaver = require('connect-mongo')(userSesssions); //To use mongo for session storage instead of server RAM
+//const mongoSeshSaver = require('connect-mongo')(userSessions); //To use mongo for session storage instead of server RAM
+
+
+
+
+// listen on port 3000 by default
+app.listen(3000, function () {
+  console.log('Express app listening on port 3000');
+});
