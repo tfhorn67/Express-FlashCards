@@ -8,6 +8,13 @@ const mongoose = require('mongoose'); // For tearing it up w/ MongoDB connection
 const userSessions = require('express-sessions'); // For quick and easy session objects
 //const mongoSeshSaver = require('connect-mongo')(userSessions); // To use mongo for session storage instead of server RAM
 
+// serve static files from /public
+app.use(express.static(__dirname + '/public'));
+
+// views engine setup
+app.set('view engine', 'pug');
+app.set('views', __dirname + '/views');
+
 // GET '/' requests
 app.get('/', function(req, res, next) {
   return res.render('index', { title: 'Home' });
