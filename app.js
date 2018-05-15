@@ -20,6 +20,21 @@ app.get('/', function(req, res, next) {
   return res.render('index', { title: 'Home' });
 });
 
+// GET '/register' requests
+app.get('/register', function(req, res, next) {
+  return res.render('register', { title: 'Sign Up' });
+});
+
+// GET '/about' requests
+app.get('/about', function(req, res, next) {
+  return res.render('about', { title: 'Sign Up' });
+});
+
+// GET '/contact' requests
+app.get('/contact', function(req, res, next) {
+  return res.render('contact', { title: 'Sign Up' });
+});
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   const err = new Error('File Not Found');
