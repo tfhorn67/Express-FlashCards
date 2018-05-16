@@ -4,4 +4,19 @@ block content
   div
     h1 Sign Up Today!
     p Fill out a form!
-    a(href='/register') Become a Member!
+
+  h1 Registration Form:
+  form(method='POST' action='/register')
+    div
+      label(for='name') Name:
+      input(type='text' placeholder='first and last' name='name')
+    div
+      label(for='email') Email:
+      input(type='email' placeholder='cheddaboy@chedda.boys' name='email')
+    div
+      label(for='password') Password:
+      input(type='password' placeholder='don\'t use \'password\'' name='password')
+    div
+      label(for='passwordMatch') Confirm Password:
+      input(type='password' placeholder='don\'t mess up' name='passwordMatch')
+    button(href='/register') Become a Member!

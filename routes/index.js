@@ -1,3 +1,5 @@
+'use-strict';
+
 const express = require('express');
 const router = express.Router();
 
@@ -9,6 +11,11 @@ router.get('/', function(req, res, next) {
 // GET '/register' requests
 router.get('/register', function(req, res, next) {
   return res.render('register', { title: 'Sign Up' });
+});
+
+// POST '/register' requests
+router.post('/register', function(req, res, next) {
+  return res.send('/register POST request received!');
 });
 
 // GET '/about' requests
