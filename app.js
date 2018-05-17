@@ -8,6 +8,14 @@ const mongoose = require('mongoose'); // For tearing it up w/ MongoDB connection
 //const userSessions = require('express-sessions'); // For quick and easy session objects
 //const mongoSeshSaver = require('connect-mongo')(userSessions); // To use mongo for session storage instead of server RAM
 
+// hook up our mongodb connection
+mongoose.connect("mongodb://localhost:27017/FlashCards");
+const db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', function() {
+  return true;
+});
+
 // parse incoming requests so we can do useful things
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));

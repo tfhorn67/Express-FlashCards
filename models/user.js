@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 
 // Define the model for our user info to be stored on signup
-const UserSchema = new Schema({
+const UserSchema = new mongoose.Schema({
     email: {
         type: String,
         required: true,
@@ -21,3 +21,9 @@ const UserSchema = new Schema({
         required: true,
     }
 });
+
+//instantiate the UserSchema model
+const User = mongoose.model('User', UserSchema);
+
+//export so we can use it all over the place
+module.exports = User;
