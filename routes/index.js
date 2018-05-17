@@ -38,20 +38,24 @@ router.post('/register', function(req, res, next) {
         //Write it to MongoDB with mongoose's model.create() method using the User model
         User.create(userData, function(error, user) {
             if (error) {
-                console.log("Error during User.create() callback function")
-                // return next(error);
+                return next(error);
             } else {
                 //assign the user's db document _id to the req.session.userId
 
                 //redirect to logged in landing page.
 
                 //for now just confirm success up to this point
-                res.send('Signed up succesfully!');
+                console.log('Signed up succesfully!');
             }
         });
-    }
 
-    return res.send('/register POST request received!');
+        return res.send('/register POST request received!');
+        
+    } else {
+          const err = new Error('All fields are required.');
+          err.status = 400;
+          return next(err);
+    }
 });
 
 // GET '/about' requests
