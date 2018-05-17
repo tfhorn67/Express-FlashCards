@@ -13,7 +13,8 @@ mongoose.connect("mongodb://localhost:27017/FlashCards");
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function() {
-  return true;
+    console.log('Mongoose connection succesful. Now connected to mongodb://localhost:27017/FlashCards');
+    return true;
 });
 
 // parse incoming requests so we can do useful things

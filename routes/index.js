@@ -40,22 +40,30 @@ router.post('/register', function(req, res, next) {
             if (error) {
                 return next(error);
             } else {
+                //for now just confirm success up to this point
+                console.log('New user document added to mongoDB FlashCards users collection!');
+
                 //assign the user's db document _id to the req.session.userId
 
                 //redirect to logged in landing page.
-
-                //for now just confirm success up to this point
-                console.log('Signed up succesfully!');
+                return res.redirect('/profile');
             }
         });
+        // Get rid of this. Just using it now to help verify POST success
+        // return res.send('/register POST request received!');
 
-        return res.send('/register POST request received!');
-        
     } else {
           const err = new Error('All fields are required.');
           err.status = 400;
           return next(err);
     }
+});
+
+// GET '/register' requests
+
+// GET '/profile' requests
+router.get('/profile', function(req, res, next) {
+    return res.render('profile', { title: 'Profile' });
 });
 
 // GET '/about' requests
