@@ -59,7 +59,22 @@ router.post('/register', function(req, res, next) {
     }
 });
 
-// GET '/register' requests
+// GET '/login' requests
+router.get('/login', function(req, res, next) {
+    return res.render('login', { title: 'Log In' });
+});
+
+// POST 'login' requests
+router.post('/login', function(req, res, next) {
+    if (req.body.email && req.body.password) {
+        return res.redirect('/profile'); //to check route is working
+        //if req.body.email === FlashCards.users.user.email
+            //if req.body.password.hashed === FlashCards.users.user.password
+                //redirect to /profile
+            //else redirect error, password or username incorrect
+        //else redirect error, password or username incorrect
+    }
+});
 
 // GET '/profile' requests
 router.get('/profile', function(req, res, next) {
