@@ -22,6 +22,20 @@ const UserSchema = new mongoose.Schema({
     }
 });
 
+//pre 'save' hook to hash password before writing to the db
+UserSchema.pre('save', function(next) {
+    const user = this;
+    //hash the password
+    bcrypt.hash(user.password, 10, function(error, hash) {
+        if (error) {
+            return next(error);
+        }
+        //overwrite the plaintext pass with the new hash
+        user.password = hash;
+        next();
+    });
+});
+
 //instantiate the UserSchema model
 const User = mongoose.model('User', UserSchema);
 

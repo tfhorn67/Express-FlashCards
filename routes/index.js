@@ -67,7 +67,7 @@ router.get('/login', function(req, res, next) {
 // POST 'login' requests
 router.post('/login', function(req, res, next) {
     if (req.body.email && req.body.password) {
-        return res.redirect('/profile'); //to check route is working
+        return res.redirect('/profile'); //to check route is working...it works!
         //if req.body.email === FlashCards.users.user.email
             //if req.body.password.hashed === FlashCards.users.user.password
                 //redirect to /profile
