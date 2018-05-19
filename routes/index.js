@@ -66,13 +66,21 @@ router.get('/login', function(req, res, next) {
 
 // POST 'login' requests
 router.post('/login', function(req, res, next) {
+    console.log('into login POST route'); //test
     if (req.body.email && req.body.password) {
-        return res.redirect('/profile'); //to check route is working...it works!
-        //if req.body.email === FlashCards.users.user.email
-            //if req.body.password.hashed === FlashCards.users.user.password
-                //redirect to /profile
-            //else redirect error, password or username incorrect
-        //else redirect error, password or username incorrect
+        console.log('into if(req.body.email && req.body.password)'); //test
+        User.authenticateUser(req.body.email, req.body.password, function(error, user) {
+            if (error || !user) {
+                const error = new Error('Incorrect Email or Password.');
+                error.status = 401;
+                return next(error);
+            } else {
+                //create a user session here...
+
+                //and redirect to /profile
+                res.redirect('/profile');
+            }
+        });
     }
 });
 

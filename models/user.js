@@ -22,6 +22,33 @@ const UserSchema = new mongoose.Schema({
     }
 });
 
+//A method for authenticating login credentials against the users database
+//Takes email and password from login POST req as arguments
+UserSchema.statics.authenticateUser = function(email, password, callback) {
+    console.log('into statics.authenticateUser'); //test
+    User.findOne({ email: email })
+        .exec(function(error, user) {
+            //handle server/db errors
+            if (error) {
+                return callback(error);
+            } else if (!user) { //handle fruitless lookups
+                const error = new Error('User not found.');
+                error.status = 401;
+                return next(error);
+            }
+            console.log('past authenticateUser error checks'); //test
+            //if we're this far, we must have found the user, so authenticate...
+            bcrypt.compare(password, user.password, function(error, result) {
+                if (result === true) {
+                    //if match, return null in place of error and supply the user's info from the db
+                    return callback(null, user);
+                } else {
+                    return callback();
+                }
+            });
+        });
+};
+
 //pre 'save' hook to hash password before writing to the db
 UserSchema.pre('save', function(next) {
     const user = this;
