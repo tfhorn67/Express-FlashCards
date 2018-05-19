@@ -25,7 +25,6 @@ const UserSchema = new mongoose.Schema({
 //A method for authenticating login credentials against the users database
 //Takes email and password from login POST req as arguments
 UserSchema.statics.authenticateUser = function(email, password, callback) {
-    console.log('into statics.authenticateUser'); //test
     User.findOne({ email: email })
         .exec(function(error, user) {
             //handle server/db errors
@@ -36,7 +35,6 @@ UserSchema.statics.authenticateUser = function(email, password, callback) {
                 error.status = 401;
                 return next(error);
             }
-            console.log('past authenticateUser error checks'); //test
             //if we're this far, we must have found the user, so authenticate...
             bcrypt.compare(password, user.password, function(error, result) {
                 if (result === true) {

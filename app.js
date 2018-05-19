@@ -13,13 +13,12 @@ mongoose.connect("mongodb://localhost:27017/FlashCards");
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function() {
-    console.log('Mongoose connection succesful. Now connected to mongodb://localhost:27017/FlashCards');
     return true;
 });
 
 // make app.js use sessions instead of just standing there looking at it
 app.use(sessions({
-  secret: 'I like turtles',
+  secret: 'I like turtles and stuff bro 4uf3989qguifhkbcv3w032dsgbc',
   resave: true,
   saveUninitialized: false,
   store:  new MongoStore({
@@ -29,8 +28,7 @@ app.use(sessions({
 
 //Make the session id available in the templates
 app.use(function(req, res, next) {
-    res.locals.currentUser = req.userSession.userId;
-    console.log('req.locals.currentUser has been set');
+    res.locals.currentUser = req.session.userId;
     next();
 })
 

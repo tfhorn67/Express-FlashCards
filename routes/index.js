@@ -66,9 +66,7 @@ router.get('/login', function(req, res, next) {
 
 // POST 'login' requests
 router.post('/login', function(req, res, next) {
-    console.log('into login POST route'); //test
     if (req.body.email && req.body.password) {
-        console.log('into if(req.body.email && req.body.password)'); //test
         User.authenticateUser(req.body.email, req.body.password, function(error, user) {
             if (error || !user) {
                 const error = new Error('Incorrect Email or Password.');
