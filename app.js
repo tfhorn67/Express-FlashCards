@@ -5,8 +5,8 @@ const express = require('express'); // Because express is nifty and nice
 const app = express(); // This is brevity. It makes it shorter. It saves time and keystrokes.
 const bodyParser = require('body-parser'); // For parsing incoming req bodies. Access w/ req.body
 const mongoose = require('mongoose'); // For tearing it up w/ MongoDB connections
-//const userSessions = require('express-sessions'); // For quick and easy session objects
-//const mongoSeshSaver = require('connect-mongo')(userSessions); // To use mongo for session storage instead of server RAM
+const sessions = require('express-session'); // For quick and easy session objects
+const MongoStore = require('connect-mongo')(sessions); // To use mongo for session storage instead of server RAM
 
 // hook up our mongodb connection
 mongoose.connect("mongodb://localhost:27017/FlashCards");
@@ -16,6 +16,23 @@ db.once('open', function() {
     console.log('Mongoose connection succesful. Now connected to mongodb://localhost:27017/FlashCards');
     return true;
 });
+
+// make app.js use sessions instead of just standing there looking at it
+app.use(sessions({
+  secret: 'I like turtles',
+  resave: true,
+  saveUninitialized: false,
+  store:  new MongoStore({
+    url: 'mongodb://localhost:27017/FlashCards'
+  })
+}));
+
+//Make the session id available in the templates
+app.use(function(req, res, next) {
+    res.locals.currentUser = req.userSession.userId;
+    console.log('req.locals.currentUser has been set');
+    next();
+})
 
 // parse incoming requests so we can do useful things
 app.use(bodyParser.json());
