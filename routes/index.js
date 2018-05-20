@@ -45,13 +45,11 @@ router.post('/register', function(req, res, next) {
                 console.log('New user document added to mongoDB FlashCards users collection!');
 
                 //assign the user's db document _id to the req.session.userId
-
+                req.session.userId = user._id;
                 //redirect to logged in landing page.
                 return res.redirect('/profile');
             }
         });
-        // Get rid of this. Just using it now to help verify POST success
-        // return res.send('/register POST request received!');
 
     } else {
           const err = new Error('All fields are required.');
@@ -71,7 +69,7 @@ router.post('/login', middleware.loggedIn, function(req, res, next) {
     if (req.body.email && req.body.password) {
         //authenticate the credentials
         User.authenticateUser(req.body.email, req.body.password, function(error, user) {
-            //Turn down bad credentials
+            //reject incorrect credentials
             if (error || !user) {
                 const error = new Error('Incorrect Email or Password.');
                 error.status = 401;
@@ -84,11 +82,24 @@ router.post('/login', middleware.loggedIn, function(req, res, next) {
                 res.redirect('/profile');
             }
         });
-    //Turn down incomplete credentials
+    //reject incomplete credentials
     } else {
         const error = new Error('Email and password are both required.');
         error.status = 400;
         return next(error);
+    }
+});
+
+//GET '/logout' requests
+router.get('/logout', function(req, res, next) {
+    if (req.session) {
+        req.session.destroy(function(error) {
+            if (error) {
+                return next(error);
+            } else {
+                return res.redirect('/');
+            }
+        });
     }
 });
 
