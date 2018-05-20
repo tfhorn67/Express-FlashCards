@@ -79,6 +79,10 @@ router.post('/login', function(req, res, next) {
                 res.redirect('/profile');
             }
         });
+    } else {
+        const error = new Error('Email and password are both required.');
+        error.status = 400;
+        return next(error);
     }
 });
 
