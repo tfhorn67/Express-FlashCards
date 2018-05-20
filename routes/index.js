@@ -3,6 +3,7 @@
 const express = require('express');
 const router = express.Router();
 const User = require('../models/user')
+const middleware = require('../middleware');
 
 // GET '/' requests
 router.get('/', function(req, res, next) {
@@ -73,8 +74,8 @@ router.post('/login', function(req, res, next) {
                 error.status = 401;
                 return next(error);
             } else {
-                //create a user session here...
-
+                //create a user session here by assigning the user's mongo id to their session id...
+                req.session.userId = user._id;
                 //and redirect to /profile
                 res.redirect('/profile');
             }
@@ -87,7 +88,7 @@ router.post('/login', function(req, res, next) {
 });
 
 // GET '/profile' requests
-router.get('/profile', function(req, res, next) {
+router.get('/profile', middleware.requiresLoggedIn, function(req, res, next) {
     return res.render('profile', { title: 'Profile' });
 });
 
