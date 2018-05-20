@@ -16,4 +16,16 @@ const requiresLoggedIn = function (req, res, next) {
     }
 };
 
+/*
+Use on routes user shouldn't access if already logged in. Redirect to /profile
+if logged in user tries to access routes like /register or /login
+*/
+const loggedIn = function (req, res, next) {
+    if (req.session && req.session.userId) {
+        return res.redirect('/profile');
+    }
+    return next();
+};
+
 module.exports.requiresLoggedIn = requiresLoggedIn;
+module.exports.loggedIn = loggedIn;

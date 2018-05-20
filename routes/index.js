@@ -11,7 +11,7 @@ router.get('/', function(req, res, next) {
 });
 
 // GET '/register' requests
-router.get('/register', function(req, res, next) {
+router.get('/register', middleware.loggedIn, function(req, res, next) {
     return res.render('register', { title: 'Sign Up' });
 });
 
@@ -61,12 +61,12 @@ router.post('/register', function(req, res, next) {
 });
 
 // GET '/login' requests
-router.get('/login', function(req, res, next) {
+router.get('/login', middleware.loggedIn, function(req, res, next) {
     return res.render('login', { title: 'Log In' });
 });
 
 // POST 'login' requests
-router.post('/login', function(req, res, next) {
+router.post('/login', middleware.loggedIn, function(req, res, next) {
     if (req.body.email && req.body.password) {
         User.authenticateUser(req.body.email, req.body.password, function(error, user) {
             if (error || !user) {
