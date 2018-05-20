@@ -67,12 +67,16 @@ router.get('/login', middleware.loggedIn, function(req, res, next) {
 
 // POST 'login' requests
 router.post('/login', middleware.loggedIn, function(req, res, next) {
+    //make sure required credentials are furnished
     if (req.body.email && req.body.password) {
+        //authenticate the credentials
         User.authenticateUser(req.body.email, req.body.password, function(error, user) {
+            //Turn down bad credentials
             if (error || !user) {
                 const error = new Error('Incorrect Email or Password.');
                 error.status = 401;
                 return next(error);
+            //accept good credentials
             } else {
                 //create a user session here by assigning the user's mongo id to their session id...
                 req.session.userId = user._id;
@@ -80,6 +84,7 @@ router.post('/login', middleware.loggedIn, function(req, res, next) {
                 res.redirect('/profile');
             }
         });
+    //Turn down incomplete credentials
     } else {
         const error = new Error('Email and password are both required.');
         error.status = 400;
@@ -89,7 +94,17 @@ router.post('/login', middleware.loggedIn, function(req, res, next) {
 
 // GET '/profile' requests
 router.get('/profile', middleware.requiresLoggedIn, function(req, res, next) {
-    return res.render('profile', { title: 'Profile' });
+    User.findById(req.session.userId)
+        .exec(function (error, user) {
+            if (error) {
+                return next(error);
+            } else {
+                return res.render('profile', {
+                    title: 'Profile',
+                    name: user.name
+                });
+            }
+        });
 });
 
 // GET '/about' requests
