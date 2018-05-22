@@ -93,7 +93,7 @@ router.post('/login', middleware.loggedIn, function(req, res, next) {
 
 //GET '/createDeck' requests
 router.get('/createDeck', function(req, res, next) {
-    return res.render('createDeck', { title: 'Create Deck' });
+    return res.render('createDeck', { title: 'Create A Deck' });
 }
 
 );
@@ -107,9 +107,9 @@ router.post('/createDeck', function(req, res, next) {
         //construct Deck data
         const deckData = {
             deckName: req.body.deckName,
-            deckCards: [{cardNumber: req.body.card1,
-                         cardFront: req.body.card1Front,
-                         cardBack: req.body.card1Back}],
+            deckCards: [{cardNumber: req.body.card, //let the front end set cardNumber
+                         cardFront: req.body.cardFront,
+                         cardBack: req.body.cardBack}],
             deckAuthor: req.session.userId
         };
         //write it to mongoDB using mongoose's create() method on the Deck model
