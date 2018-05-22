@@ -1,0 +1,22 @@
+extends layout
+
+block content
+  div
+    h1 Make a Deck!
+    p Fill out the form!
+
+  h1 Registration Form:
+  form(method='POST' action='/createDeck')
+    div
+      label(for='deckName') Deck Name:
+      input(type='text' placeholder='deck name' name='deckName')
+    div
+      label(for='card1') Card Number:
+      input(type='text' placeholder='card number' name='card1')
+    div
+      label(for='card1Front') Card Front:
+      input(type='text' placeholder='front of card 1' name='card1Front')
+    div
+      label(for='card1Back') Card Back:
+      input(type='text' placeholder='back of card 1' name='card1Back')
+    button(href='/createDeck') Create the Deck!

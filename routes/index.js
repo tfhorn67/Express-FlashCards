@@ -2,7 +2,8 @@
 
 const express = require('express');
 const router = express.Router();
-const User = require('../models/user')
+const User = require('../models/user');
+const Deck = require('../models/deck');
 const middleware = require('../middleware');
 
 // GET '/' requests
@@ -87,6 +88,41 @@ router.post('/login', middleware.loggedIn, function(req, res, next) {
         const error = new Error('Email and password are both required.');
         error.status = 400;
         return next(error);
+    }
+});
+
+//GET '/createDeck' requests
+router.get('/createDeck', function(req, res, next) {
+    return res.render('createDeck', { title: 'Create Deck' });
+}
+
+);
+
+//POST '/createDeck' requests...a test to see if the deck.js model holds water
+router.post('/createDeck', function(req, res, next) {
+    if (req.body.deckName &&
+        req.body.card1 &&
+        req.body.card1Front &&
+        req.body.card1Back) {
+        //construct Deck data
+        const deckData = {
+            deckName: req.body.deckName,
+            deckCards: [{cardNumber: req.body.card1,
+                         cardFront: req.body.card1Front,
+                         cardBack: req.body.card1Back}],
+            deckAuthor: req.session.userId
+        };
+        //write it to mongoDB using mongoose's create() method on the Deck model
+        Deck.create(deckData, function(error, deck) {
+            if (error) {
+                return next(error);
+            } else {
+                console.log(`New deck added to MongoDB, author: ${req.session.userId}`);
+                return res.redirect('/profile');
+            }
+        });
+    } else {
+        const error = new Error(`Must have Name, Number, Front, Back`);
     }
 });
 

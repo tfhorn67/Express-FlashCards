@@ -29,8 +29,7 @@ const DeckSchema = new mongoose.Schema({
         trim: true
     },
     deckCards: [CardSchema],
-    deckAuthor: ObjectId,
-    createdAt: {type: Date, default: Date.now}
+    deckAuthor: {type: String, required: true},
 });
 
 //instantiate the DeckSchema into a model
