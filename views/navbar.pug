@@ -8,6 +8,8 @@ nav
         a(href='/about')  About |
         a(href='/contact')  Contact |
         a(href='/profile')  My Profile |
+        if currentUser
+          a(href='/createDeck')  Create a Deck |
         if !currentUser
           a(href='/login')  Login |
         else
