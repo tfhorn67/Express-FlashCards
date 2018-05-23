@@ -9,6 +9,7 @@ nav
         a(href='/contact')  Contact |
         a(href='/profile')  My Profile |
         if currentUser
+          a(href='/viewDecks')  Your Decks |
           a(href='/createDeck')  Create a Deck |
         if !currentUser
           a(href='/login')  Login |

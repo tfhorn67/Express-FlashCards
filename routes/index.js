@@ -94,9 +94,7 @@ router.post('/login', middleware.loggedIn, function(req, res, next) {
 //GET '/createDeck' requests
 router.get('/createDeck', function(req, res, next) {
     return res.render('createDeck', { title: 'Create A Deck' });
-}
-
-);
+});
 
 //POST '/createDeck' requests...a test to see if the deck.js model holds water
 router.post('/createDeck', function(req, res, next) {
@@ -112,6 +110,13 @@ router.post('/createDeck', function(req, res, next) {
             return res.sendStatus(200);
         }
     });
+});
+
+//GET '/viewDecks' requests
+router.get('/viewDecks', function(req, res, next) {
+    //Query DB for decks associate w/ req.session.userId and return the decks in the response
+    //Let the front end receive a json object of the relevant decks, map it and render a list
+    return res.render('userDecks', { title: 'Look at Some Decks' });
 });
 
 //GET '/logout' requests
