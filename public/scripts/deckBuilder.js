@@ -56,7 +56,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     deckForm.addEventListener('submit', (event) => {
         event.preventDefault();
-        console.log('deckForm submit button clicked');
+        console.log('POST request being prepared and attempted');
         //Stringify the deckData object, send a POST req to /createDeck with deckData as the body
         var xhr = new XMLHttpRequest();
         xhr.open("POST", '/createDeck', true);
@@ -71,6 +71,5 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         xhr.send(JSON.stringify(deckData));
-        console.log('I think this worked...');
     });
 });

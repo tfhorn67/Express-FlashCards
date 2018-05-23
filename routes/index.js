@@ -100,31 +100,18 @@ router.get('/createDeck', function(req, res, next) {
 
 //POST '/createDeck' requests...a test to see if the deck.js model holds water
 router.post('/createDeck', function(req, res, next) {
-    console.log(req.body.deckName); // works!
-    // if (req.body.deckName &&
-    //     req.body.card1 &&
-    //     req.body.card1Front &&
-    //     req.body.card1Back) {
-    //     //construct Deck data
-    //     const deckData = {
-    //         deckName: req.body.deckName,
-    //         deckCards: [{cardNumber: req.body.card, //let the front end set cardNumber
-    //                      cardFront: req.body.cardFront,
-    //                      cardBack: req.body.cardBack}],
-    //         deckAuthor: req.session.userId
-    //     };
-    //     //write it to mongoDB using mongoose's create() method on the Deck model
-    //     Deck.create(deckData, function(error, deck) {
-    //         if (error) {
-    //             return next(error);
-    //         } else {
-    //             console.log(`New deck added to MongoDB, author: ${req.session.userId}`);
-    //             return res.redirect('/profile');
-    //         }
-    //     });
-    // } else {
-    //     const error = new Error(`Must have Name, Number, Front, Back`);
-    // }
+    const deckData = req.body;
+    deckData.deckAuthor = req.session.userId
+    console.log(deckData);
+    //write it to mongoDB using mongoose's create() method on the Deck model
+    Deck.create(deckData, function(error, deck) {
+        if (error) {
+            return next(error);
+        } else {
+            console.log(`New deck added to MongoDB, author: ${req.session.userId}`);
+            return res.sendStatus(200);
+        }
+    });
 });
 
 //GET '/logout' requests
