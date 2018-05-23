@@ -100,7 +100,7 @@ router.get('/createDeck', function(req, res, next) {
 
 //POST '/createDeck' requests...a test to see if the deck.js model holds water
 router.post('/createDeck', function(req, res, next) {
-    console.log(req.body);
+    console.log(req.body.deckName); // works!
     // if (req.body.deckName &&
     //     req.body.card1 &&
     //     req.body.card1Front &&
