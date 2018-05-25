@@ -1,3 +1,5 @@
+'use-strict';
+
 /*
 To be used on userDecks.pug. Should receive the user's deck information from
 the Pug template, iterate over it and render a list of decks from which the user

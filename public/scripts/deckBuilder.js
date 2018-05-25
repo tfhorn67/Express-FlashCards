@@ -1,3 +1,5 @@
+'use-strict';
+
 /*
 Script for building new deck data into a correctly structured object and then
 posting it to the server so the backend can do its job.

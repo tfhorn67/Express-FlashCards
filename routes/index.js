@@ -91,12 +91,12 @@ router.post('/login', middleware.loggedIn, function(req, res, next) {
     }
 });
 
-//GET '/createDeck' requests
+// GET '/createDeck' requests
 router.get('/createDeck', middleware.requiresLoggedIn, function(req, res, next) {
     return res.render('createDeck', { title: 'Create A Deck' });
 });
 
-//POST '/createDeck' requests...a test to see if the deck.js model holds water
+// POST '/createDeck' requests...a test to see if the deck.js model holds water
 router.post('/createDeck', middleware.requiresLoggedIn, function(req, res, next) {
     const deckData = req.body;
     deckData.deckAuthor = req.session.userId
@@ -112,7 +112,7 @@ router.post('/createDeck', middleware.requiresLoggedIn, function(req, res, next)
     });
 });
 
-//GET '/viewDecks' requests
+// GET '/viewDecks' requests
 router.get('/viewDecks', middleware.requiresLoggedIn, function(req, res, next) {
     //Query DB for decks associate w/ req.session.userId and return the decks in the response
     Deck.find({deckAuthor: req.session.userId})
@@ -127,7 +127,12 @@ router.get('/viewDecks', middleware.requiresLoggedIn, function(req, res, next) {
     //Let the front end receive a json object of the relevant decks, map it and render a list
 });
 
-//GET '/logout' requests
+// GET '/userDecks/:deckId' requests
+router.get('/userDecks/:deckId', function(req, res, next) {
+    return res.render('deck', { title: 'deckName' });
+});
+
+// GET '/logout' requests
 router.get('/logout', function(req, res, next) {
     if (req.session) {
         req.session.destroy(function(error) {
