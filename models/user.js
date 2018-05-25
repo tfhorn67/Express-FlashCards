@@ -33,7 +33,7 @@ UserSchema.statics.authenticateUser = function(email, password, callback) {
             } else if (!user) { //handle fruitless lookups
                 const error = new Error('User not found.');
                 error.status = 401;
-                return next(error);
+                return callback(error);
             }
             //if we're this far, we must have found the user, so authenticate...
             bcrypt.compare(password, user.password, function(error, result) {

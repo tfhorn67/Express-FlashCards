@@ -1,9 +1,11 @@
 extends layout
 
 block content
-  div
-    h1 View your decks
+  div#listContainer
+    h1 Deck list goes here
     p Pick a deck, then view it
-  div
-  //script
-    //include ../public/scripts/deckViewer.js
+    
+  script(type='text/javascript').
+    var userDecks = !{JSON.stringify(userDecks)}
+  script
+    include ../public/scripts/deckViewer.js
