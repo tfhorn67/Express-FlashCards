@@ -1,6 +1,11 @@
 extends layout
 
 block content
-  div
-    h1 Deck
-    p Yr deck starts here...
+  div#deckContainer
+    h1 #{deckName}
+    
+    
+  script(type='text/javascript').
+    var userDeck = !{JSON.stringify(userDeck)}
+  script
+    include ../public/scripts/cardViewer.js

@@ -128,8 +128,18 @@ router.get('/viewDecks', middleware.requiresLoggedIn, function(req, res, next) {
 });
 
 // GET '/userDecks/:deckId' requests
-router.get('/userDecks/:deckId', function(req, res, next) {
-    return res.render('deck', { title: 'deckName' });
+router.get('/userDecks/:deckId', middleware.requiresLoggedIn, function(req, res, next) {
+    //Query DB for requested deck return the deck in the response
+    Deck.find({_id: req.params.deckId})
+        .exec(function(error, decks) {
+            if (error) {
+                return next(error);
+            } else {
+                const deckName = decks[0].deckName
+                const userDeck = JSON.stringify(decks);
+                return res.render('deck', { title: 'Your Deck' , userDeck, deckName });
+            }
+        });
 });
 
 // GET '/logout' requests
