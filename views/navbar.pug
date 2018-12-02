@@ -1,17 +1,18 @@
-nav
-  div#navbar
-    div
-      a(href='/') | Home |
-      div
-        if !currentUser
-          a(href='/register') | Sign Up |
-        a(href='/about')  About |
-        a(href='/contact')  Contact |
-        a(href='/profile')  My Profile |
-        if currentUser
-          a(href='/viewDecks')  Your Decks |
-          a(href='/createDeck')  Create a Deck |
-        if !currentUser
-          a(href='/login')  Login |
-        else
-          a(href='/logout')  Logout |
+nav.navbar.navbar-expand-lg.navbar-light.bg-light
+  a(href='/').navbar-brand Flashcards
+  button(type='button' data-toggle='collapse' data-target='#navbarNavAltMarkup' aria-controls='navbarNavAltMarkup'   aria-expanded='false' aria-label='Toggle navigation').navbar-toggler
+    span.navbar-toggler-icon
+  div.collapse.navbar-collapse
+    div.navbar-nav
+      if !currentUser
+        a(href='/register').nav-item.nav-link Sign Up
+      a(href='/about').nav-item.nav-link  About
+      a(href='/contact').nav-item.nav-link  Contact
+      a(href='/profile').nav-item.nav-link  My Profile
+      if currentUser
+        a(href='/viewDecks').nav-item.nav-link  Your Decks
+        a(href='/createDeck').nav-item.nav-link  Create a Deck
+      if !currentUser
+        a(href='/login').nav-item.nav-link  Login
+      else
+        a(href='/logout').nav-item.nav-link  Logout

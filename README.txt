@@ -12,3 +12,5 @@ with sessions, user authentication/authorization etc.
 I'm not really concerned with the front end on this project. I'm using pug and
 bootstrap so I can get to a minimum functional frontend in a hurry. I may come
 back and actually try to make the front end nice in the future. TBD.
+
+To spin up server-side --> spin up the mongo db daemon w/ "mongod" in a terminal window, spin up the app w/ "nodemon" for active development or just "node app.js" if you just need it to run.

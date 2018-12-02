@@ -10,13 +10,13 @@ head
   body
     // load navbar.jade
     include navbar
-
-    // content block
-    block content
-
-    // footer
-    hr
-    p.font-weight-light A project for learning my way around Node/Express/MongoDB/Pug and some common packages like mongoose
+    
+    //main-content
+    div.container-fluid
+      block content
+      // footer
+      hr
+      p.font-weight-light.font-italic A project for learning my way around Node/Express/MongoDB/Pug and some common packages like mongoose
 
     script(src='https://code.jquery.com/jquery-3.2.1.slim.min.js', integrity='sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN', crossorigin='anonymous')
     script(src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js', integrity='sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q', crossorigin='anonymous')
