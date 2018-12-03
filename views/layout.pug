@@ -7,12 +7,12 @@ head
   link(rel='stylesheet', href='/stylesheets/styles.css')
 
 
-  body
+  body.bg-light
     // load navbar.jade
     include navbar
     
     //main-content
-    div.container-fluid
+    div.container-fluid.alert.alert-secondary
       block content
       // footer
       hr

@@ -7,22 +7,21 @@ block content
     p Note: I haven't set up the front end to reflect the deck's state in the DOM. For now, every time you add/change the name or add a card, the deck object is logged in the developer console.
 
   h1 Deck Builder:
-  form#nameForm
-    div
-      label(for='deckName') Deck Name:
-      input#nameInput(type='text' placeholder='deck name' name='deckName')
-    button Name the Deck!
-  form#cardForm
-    div
-      label(for='cardFront') Card Front:
-      input#cardFront(type='text' placeholder='front of card' name='cardFront')
-    div
-      label(for='cardBack') Card Back:
-      input#cardBack(type='text' placeholder='back of card' name='cardBack')
-    button Add the Card!
-  form#deckForm
-    div
-      button Save the Deck
+  div.w-50
+    form#nameForm
+      div.input-group.mb-3
+        div.input-group-prepend
+          button.btn.btn-info Name the Deck!
+        input#nameInput(type='text' placeholder='Deck Name' name='deckName').form-control
+    form#cardForm
+      div.input-group.mb-3
+        input#cardFront(type='text' placeholder='Front of card' name='cardFront').form-control
+      div.input-group.mb-3
+        textarea#cardBack(type='text' placeholder='Back of card' name='cardBack').form-control
+        div.input-group-append
+          button.btn.btn-info Add the Card!
+    form#deckForm
+      button.btn.btn-primary Save the Deck
     
   script
     include ../public/scripts/deckBuilder.js
