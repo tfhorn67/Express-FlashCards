@@ -13,11 +13,9 @@ document.addEventListener('DOMContentLoaded', () => {
     if (userDecks.length > 0) {
         for (let i = 0; i < userDecks.length; i++) {
             listDiv.innerHTML +=
-                `<p>
-                    <a href="/userDecks/${userDecks[i]._id}">
-                        ${userDecks[i].deckName}
-                    </a>
-                </p>`;
+                `<a href="/userDecks/${userDecks[i]._id}" class="list-group-item list-group-item-action">
+                    ${userDecks[i].deckName}
+                </a>`;
         }
     }
     else {

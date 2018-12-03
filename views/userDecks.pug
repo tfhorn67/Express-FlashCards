@@ -1,9 +1,10 @@
 extends layout
 
 block content
-  div#listContainer
+  div
     h1 Here's a list of your decks.
     p Pick a deck, then view it!
+  div#listContainer.list-group.w-50
     
   script(type='text/javascript').
     var userDecks = !{JSON.stringify(userDecks)}
