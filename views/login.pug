@@ -1,16 +1,11 @@
 extends layout
 
-block content
-  div
-    h1 Log In To Your Account!
-    p Enter Your Credentials Below.
-    
+block content    
   h1 Login:
-  form(method='POST' action='/login')
-    div
-      label(for='email') Email:
-      input(type='email' placeholder='cheddaboy@chedda.boys' name='email')
-    div
-      label(for='password') Password:
-      input(type='password' placeholder='Don\'t mess up' name='password')
-    button(href='/register') Log Me On!
+  div.w-25
+    form(method='POST' action='/login')
+      div.input-group.mb-3
+        input(type='email' placeholder='User Email' name='email').form-control
+      div.input-group.mb-3
+        input(type='password' placeholder='User Password' name='password').form-control
+      button(href='/register').btn.btn-primary Log Me On!

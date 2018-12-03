@@ -5,18 +5,14 @@ block content
     h1 Sign Up Today!
     p Fill out a form!
 
-  h1 Registration Form:
-  form(method='POST' action='/register')
-    div
-      label(for='name') Name:
-      input(type='text' placeholder='first and last' name='name')
-    div
-      label(for='email') Email:
-      input(type='email' placeholder='cheddaboy@chedda.boys' name='email')
-    div
-      label(for='password') Password:
-      input(type='password' placeholder='don\'t use \'password\'' name='password')
-    div
-      label(for='passwordMatch') Confirm Password:
-      input(type='password' placeholder='don\'t mess up' name='passwordMatch')
-    button(href='/register') Become a Member!
+  div.w-25
+    form(method='POST' action='/register')
+      div.input-group.mb-3
+        input(type='text' placeholder='Full Name' name='name').form-control
+      div.input-group.mb-3
+        input(type='email' placeholder='Email Address' name='email').form-control
+      div.input-group.mb-3
+        input(type='password' placeholder='Password' name='password').form-control
+      div.input-group.mb-3
+        input(type='password' placeholder='Confirm Password' name='passwordMatch').form-control
+      button(href='/register').btn.btn-primary Become a Member!
