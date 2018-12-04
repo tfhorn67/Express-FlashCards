@@ -10,7 +10,30 @@ document.addEventListener('DOMContentLoaded', () => {
 
     //default: display card1.cardFront
     cardText.innerHTML = userDeck.deckCards[0].cardFront;
+    let cardNumber = 0;
 
+    next.addEventListener('click', () => {
+        cardNumber++;
+        cardText.innerHTML = userDeck.deckCards[cardNumber].cardFront;
+        console.log('next clicked!');
+    });
+
+    previous.addEventListener('click', () => {
+        cardNumber--;
+        cardText.innerHTML = userDeck.deckCards[cardNumber].cardFront;
+        console.log('previous clicked!');
+    });
+
+    flipCard.addEventListener('click', () => {
+        if (cardText.innerHTML === userDeck.deckCards[cardNumber].cardFront) {
+            cardText.innerHTML = userDeck.deckCards[cardNumber].cardBack;
+        } else if (cardText.innerHTML === userDeck.deckCards[cardNumber].cardBack) {
+            cardText.innerHTML = userDeck.deckCards[cardNumber].cardFront;
+        } else {
+            cardText.innerHTML = "Oh No! Something went wrong with the deck.;";
+        }
+        console.log('flip card clicked!');
+    });
 
     // //if user has decks, display list of names/links to their decks
     // if (userDeck.deckCards) {
