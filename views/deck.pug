@@ -3,6 +3,14 @@ extends layout
 block content
   div#deckContainer
     h1 #{deckName}
+    div.card.text-center.w-50.mx-auto
+      div.card-body
+        h5#cardText.card-title
+      div.card-footer.text-muted
+        a(href='#')#previous.btn.btn-primary.float-right Previous
+        a(href='#')#flip.btn.btn-primary Flip Card
+        a(href='#')#next.btn.btn-primary.float-left Next
+    
     
     
   script(type='text/javascript').
